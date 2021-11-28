@@ -1,0 +1,17 @@
+name: widget story
+repository: https://github.com/andreaswierm/widget_story
+
+packages:
+  - packages/**
+
+scripts:
+  test:
+    run: melos exec --dir-exists="test" --fail-fast -- flutter test --no-pub --coverage
+    description: Run tests for a specific package in this project.
+    select-package:
+      flutter: true
+      dir-exists: test
+
+  generate:flutter:
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    description: Build all generated files for Flutter packages in this project.
